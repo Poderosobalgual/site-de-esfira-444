@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Tela do cliente</title>
+<link rel="stylesheet" href="css/vars.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-user-select: none; user-select: none; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: var(--verde-escuro); font-family: var(--fonte); color: var(--branco); }
+  #raiz { position: absolute; left: 0; top: 0; width: 800px; height: 480px; background: var(--verde-escuro); transform-origin: 0 0; overflow: hidden; }
+  .v { position: absolute; left: 0; top: 0; right: 0; bottom: 0; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px 28px; text-align: center; }
+  .v.ativa { display: flex; animation: ent .25s ease-out; }
+  @keyframes ent { from { opacity: 0; } to { opacity: 1; } }
+
+  /* espera */
+  #v-espera { background: var(--verde-escuro); }
+  #esLogo svg { width: 120px; height: 120px; animation: flut 3s ease-in-out infinite; }
+  @keyframes flut { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  #esNome { font-size: 52px; font-weight: 800; margin-top: 12px; }
+  #esMsg { font-size: 36px; margin-top: 12px; color: #C8E6C9; animation: resp 2.4s ease-in-out infinite; }
+  @keyframes resp { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+
+  /* pedido */
+  #v-pedido { background: var(--bege); color: var(--texto); justify-content: flex-start; padding-top: 14px; }
+  #v-pedido h1 { font-size: 34px; color: var(--verde-escuro); margin-bottom: 6px; }
+  #pdLista { width: 100%; flex: 1; min-height: 0; overflow: hidden; text-align: left; }
+  .li { display: flex; font-size: 28px; padding: 5px 0; border-bottom: 1px solid #E0D6C8; }
+  .li .q { flex: 0 0 64px; font-weight: 800; color: var(--verde-escuro); }
+  .li .n { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .li .p { flex: 0 0 140px; text-align: right; font-weight: 700; }
+  #pdDesc { width: 100%; display: none; justify-content: space-between; font-size: 28px; font-weight: 700; color: var(--verde-escuro); padding-top: 6px; }
+  .total { width: 100%; display: flex; justify-content: space-between; align-items: baseline; font-weight: 900; border-top: 4px solid var(--marrom); margin-top: 6px; padding-top: 4px; color: var(--marrom); }
+  .total span:first-child { font-size: 38px; } .total span:last-child { font-size: 72px; line-height: 1; }
+
+  /* pagamento */
+  #v-pagamento { background: var(--bege); color: var(--texto); }
+  #pgTitulo { font-size: 40px; font-weight: 800; color: var(--verde-escuro); line-height: 1.15; }
+  #pgValor { font-size: 84px; font-weight: 900; color: var(--marrom); margin-top: 8px; }
+  #pgNfc { margin-top: 10px; }
+  #pgNfc svg { width: 110px; height: 110px; animation: pul 1.6s ease-in-out infinite; }
+  @keyframes pul { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(.9); opacity: .6; } }
+  #pgPix { display: none; align-items: center; }
+  #pgQr { width: 340px; height: 340px; background: #fff; padding: 8px; border-radius: 12px; flex: 0 0 340px; }
+  #pgQr svg { width: 100%; height: 100%; display: block; }
+  #pgPixInfo { margin-left: 24px; text-align: left; }
+  #pgPixInfo .pt { font-size: 30px; font-weight: 800; color: var(--verde-escuro); margin-bottom: 8px; line-height: 1.15; }
+  #pgPixInfo .vl { font-size: 64px; font-weight: 900; color: var(--marrom); }
+
+  /* aprovado */
+  #v-aprovado { background: var(--verde); }
+  #apTitulo { font-size: 46px; font-weight: 800; }
+  #apSenha { font-size: 84px; font-weight: 900; line-height: 1.05; margin-top: 12px; }
+  #apOk svg { width: 100px; height: 100px; }
+  #apMsg { font-size: 30px; margin-top: 10px; opacity: .95; }
+
+  /* erro / cancelado */
+  #v-erro { background: var(--marrom); }
+  #erMsg { font-size: 44px; font-weight: 800; line-height: 1.2; }
+</style>
+</head>
+<body>
+<div id="raiz">
+  <div class="v ativa" id="v-espera"><div id="esLogo"></div><div id="esNome"></div><div id="esMsg"></div></div>
+
+  <div class="v" id="v-pedido">
+    <h1 id="pdTitulo"></h1>
+    <div id="pdLista"></div>
+    <div id="pdDesc"><span id="pdDescL"></span><span id="pdDescV"></span></div>
+    <div class="total"><span id="pdTotL"></span><span id="pdTotV"></span></div>
+  </div>
+
+  <div class="v" id="v-pagamento">
+    <div id="pgCartao">
+      <div id="pgTitulo"></div>
+      <div id="pgNfc"><svg viewBox="0 0 64 64"><path d="M20 22a16 16 0 0 1 0 20M28 16a24 24 0 0 1 0 32M36 10a32 32 0 0 1 0 44" stroke="#2E7D32" stroke-width="5" fill="none" stroke-linecap="round"/></svg></div>
+      <div id="pgValor"></div>
+    </div>
+    <div id="pgPix"><div id="pgQr"></div><div id="pgPixInfo"><div class="pt" id="pgPixTxt"></div><div class="vl" id="pgPixValor"></div></div></div>
+  </div>
+
+  <div class="v" id="v-aprovado">
+    <div id="apOk"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="#fff"/><path d="M18 33l10 10 19-21" stroke="#2E7D32" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div id="apTitulo"></div><div id="apSenha"></div><div id="apMsg"></div>
+  </div>
+
+  <div class="v" id="v-erro"><div id="erMsg"></div></div>
+</div>
+
+<script src="js/pix-brcode.js"></script>
+<script src="js/qrcode.js"></script>
+<script src="js/qr-svg.js"></script>
+<script src="js/core.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/art.js"></script>
+<script src="js/services.js"></script>
+<script src="js/cliente.js"></script>
+</body>
+</html>

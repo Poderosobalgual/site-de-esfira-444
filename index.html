@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Totem</title>
+<link rel="stylesheet" href="css/vars.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="palco-fundo"></div>
+<div id="palco">
+  <header id="topo">
+    <button id="logo" type="button"><span id="logoSvg"></span><span id="logoNome"></span></button>
+    <div class="espaco"></div>
+    <button class="btn-topo" data-lang="pt" type="button">PT</button>
+    <button class="btn-topo" data-lang="en" type="button">EN</button>
+    <button class="btn-topo" data-lang="es" type="button">ES</button>
+    <button class="btn-topo" id="bAcess" type="button"></button>
+    <button class="btn-topo" id="bAtend" type="button"></button>
+  </header>
+
+  <main id="telas">
+    <section id="t-atracao" class="tela ativa">
+      <div id="carrossel"></div>
+      <div id="atracaoNome"></div>
+      <div id="atracaoToque"></div>
+    </section>
+
+    <section id="t-local" class="tela">
+      <h1 id="localTitulo"></h1>
+      <div class="dupla">
+        <button class="grande" id="bAqui" type="button"></button>
+        <button class="grande marrom" id="bLevar" type="button"></button>
+      </div>
+    </section>
+
+    <section id="t-cardapio" class="tela">
+      <div id="centro">
+        <div class="faixa esf"><h2 id="hEsf"></h2><div class="cards" id="cardsEsf"></div></div>
+        <div class="faixa beb"><h2 id="hBeb"></h2><div class="cards" id="cardsBeb"></div></div>
+      </div>
+      <aside id="painel">
+        <h2 id="hPedido"></h2>
+        <div id="linhas"></div>
+        <button id="cupomLink" type="button"></button>
+        <div class="tot" id="rSub"><span id="lSub"></span><span id="vSub"></span></div>
+        <div class="tot desc" id="rDesc" style="display:none"><span id="lDesc"></span><span id="vDesc"></span></div>
+        <div class="tot final"><span id="lTotal"></span><span id="vTotal"></span></div>
+        <div class="acoes">
+          <button class="btn btn-verm" id="bCancelar" type="button"></button>
+          <button class="btn btn-verde" id="bPagar" type="button"></button>
+        </div>
+      </aside>
+    </section>
+
+    <section id="t-nome" class="tela">
+      <h1 id="nomeTitulo"></h1>
+      <div class="dica" id="nomeDica"></div>
+      <div class="campo" id="nomeCampo"></div>
+      <div class="teclado" id="nomeTeclado"></div>
+      <div class="rodape-nome">
+        <button class="btn btn-claro" id="nomeVoltar" type="button"></button>
+        <button class="btn btn-verde" id="nomeOk" type="button"></button>
+      </div>
+    </section>
+
+    <section id="t-pagamento" class="tela">
+      <div id="pgConteudo"></div>
+    </section>
+
+    <section id="t-senha" class="tela">
+      <div class="rot" id="senhaRot"></div>
+      <div id="senhaGrande"></div>
+      <div id="senhaResumo"></div>
+      <div id="senhaRetire"></div>
+      <div id="senhaAviso"></div>
+      <button class="btn btn-claro" id="senhaReimp" type="button"></button>
+      <div id="senhaVolta"></div>
+    </section>
+  </main>
+
+  <!-- camadas -->
+  <div class="ov" id="ov-confirma"><div class="caixa">
+    <h2 id="cfTitulo"></h2><p id="cfTexto"></p>
+    <div class="linha-btns"><button class="btn btn-claro" id="cfNao" type="button"></button><button class="btn btn-verm" id="cfSim" type="button"></button></div>
+  </div></div>
+
+  <div class="ov" id="ov-cupom"><div class="caixa">
+    <h2 id="cuTitulo"></h2>
+    <div class="campo campo-p" id="cuCampo"></div>
+    <div id="cupomMsg"></div>
+    <div class="teclado" id="cuTeclado"></div>
+    <div class="linha-btns"><button class="btn btn-claro" id="cuFechar" type="button"></button><button class="btn btn-verde" id="cuAplicar" type="button"></button></div>
+  </div></div>
+
+  <div class="ov" id="ov-inativo"><div class="caixa">
+    <h2 id="inTitulo"></h2><p id="inTexto"></p><div id="inativoNum">10</div>
+    <button class="btn btn-verde" id="inOk" type="button"></button>
+  </div></div>
+
+  <div class="ov" id="ov-acess"><div class="caixa">
+    <h2 id="acTitulo"></h2>
+    <button class="opcao" id="acContraste" type="button"><span></span><i class="chave"></i></button>
+    <button class="opcao" id="acLetra" type="button"><span></span><i class="chave"></i></button>
+    <button class="opcao" id="acCadeira" type="button"><span></span><i class="chave"></i></button>
+    <button class="opcao" id="acDalt" type="button"><span></span><i class="chave"></i></button>
+    <button class="opcao" id="acVoz" type="button"><span></span><i class="chave"></i></button>
+    <button class="opcao" id="acSom" type="button"><span></span><i class="chave"></i></button>
+    <div class="linha-btns"><button class="btn btn-verde" id="acFechar" type="button"></button></div>
+  </div></div>
+
+  <div class="ov" id="ov-pin"><div class="caixa">
+    <h2 id="pinTitulo"></h2>
+    <div class="campo campo-p" id="pinCampo"></div>
+    <div id="pinMsg" class="msg-erro" style="min-height:2rem;font-size:1.3rem"></div>
+    <div class="teclado" id="pinTeclado"></div>
+    <div class="linha-btns"><button class="btn btn-claro" id="pinFechar" type="button"></button></div>
+  </div></div>
+
+  <div class="ov" id="ov-tecnico"><div class="caixa">
+    <h2 id="tecTitulo"></h2>
+    <div id="tecCorpo"></div>
+    <div class="linha-btns"><button class="btn btn-verde" id="tecSalvar" type="button"></button><button class="btn btn-claro" id="tecFechar" type="button"></button></div>
+  </div></div>
+
+  <div id="toast"></div>
+</div>
+
+<script src="js/pix-brcode.js"></script>
+<script src="js/qrcode.js"></script>
+<script src="js/qr-svg.js"></script>
+<script src="js/core.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/art.js"></script>
+<script src="js/services.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

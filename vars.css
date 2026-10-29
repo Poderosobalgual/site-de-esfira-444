@@ -1,0 +1,33 @@
+/* Todas as variáveis visuais ficam aqui. */
+:root {
+  --verde: #2E7D32;
+  --verde-escuro: #1B5E20;
+  --marrom: #5D4037;
+  --marrom-claro: #A1887F;
+  --bege: #F5EFE6;
+  --branco: #FFFFFF;
+  --vermelho: #C62828;
+  --texto: #3E2723;
+  --sombra: 0 2px 8px rgba(0, 0, 0, 0.18);
+  --raio: 16px;
+  --toque: 56px;
+  --fonte: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --escala: 1;
+}
+/* alto contraste */
+body.contraste {
+  --bege: #FFFFFF;
+  --texto: #000000;
+  --marrom: #000000;
+  --marrom-claro: #000000;
+  --verde: #0B5D0F;
+  --verde-escuro: #003D05;
+  --vermelho: #9B0000;
+}
+/* daltonismo: troca verde/vermelho por azul/laranja */
+body.daltonismo {
+  --verde: #0D47A1;
+  --verde-escuro: #002171;
+  --vermelho: #E65100;
+}
+body.letra-grande { --escala: 1.18; }

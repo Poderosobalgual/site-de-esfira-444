@@ -1,0 +1,11 @@
+{
+  "restaurante": "Casa da Esfiha",
+  "itens": [
+    { "id": "carne",     "grupo": "esfihas", "nome": { "pt": "Esfiha de Carne",              "en": "Beef Esfiha",             "es": "Esfiha de Carne" },              "preco": 6.50 },
+    { "id": "queijo",    "grupo": "esfihas", "nome": { "pt": "Esfiha de Queijo",             "en": "Cheese Esfiha",           "es": "Esfiha de Queso" },              "preco": 6.50 },
+    { "id": "calabresa", "grupo": "esfihas", "nome": { "pt": "Esfiha de Calabresa",          "en": "Sausage Esfiha",          "es": "Esfiha de Chorizo" },            "preco": 6.50 },
+    { "id": "bacon",     "grupo": "esfihas", "nome": { "pt": "Esfiha de Calabresa com Bacon", "en": "Sausage & Bacon Esfiha", "es": "Esfiha de Chorizo con Tocino" }, "preco": 7.50 },
+    { "id": "coca",      "grupo": "bebidas", "nome": { "pt": "Coca-Cola (lata 350 ml)",      "en": "Coca-Cola (350 ml can)",  "es": "Coca-Cola (lata 350 ml)" },      "preco": 6.00 },
+    { "id": "guarana",   "grupo": "bebidas", "nome": { "pt": "Guaraná (lata 350 ml)",        "en": "Guaraná (350 ml can)",    "es": "Guaraná (lata 350 ml)" },        "preco": 6.00 }
+  ]
+}
